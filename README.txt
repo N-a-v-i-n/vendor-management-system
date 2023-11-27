@@ -183,7 +183,74 @@ API's Working:- (note :- all apis are token authentication)
         }
 
 
+7. get performance for a particular vendor
 
+        curl  -X GET \
+          'http://127.0.0.1:8000/api/vendors/1/performance/' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)'
+
+
+
+        o/p res:-
+        -----------------
+
+        {
+          "Performance": {
+            "id": 1,
+            "date": "2023-11-27T16:03:13.506185Z",
+            "on_time_delivery_rate": 0.0,
+            "quality_rating_avg": 3.0,
+            "average_response_time": 0.0,
+            "fulfillment_rate": 25.0,
+            "vendor": 1
+          }
+        }
+
+
+
+8. Delete purchase order
+
+        curl  -X DELETE \
+          'http://127.0.0.1:8000/api/purchase_orders/80785ccc' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b'
+
+
+        o/p res:-
+        -----------------
+
+        {
+          "msg": "Purchasen order deleted"
+        }
+
+
+9. update purchase status
+
+        curl  -X PUT \
+          'http://127.0.0.1:8000/api/purchase_orders/d487ab1f' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+          "quality_rating":4.9,
+          "status":"completed"
+        }'
+
+
+        o/p res:-
+        -----------------
+        {
+          "msg": "Purchase order updated"
+        }
+
+
+
+Project details :-
+----------------------------------
+----------------------------------
 
 Vendor Management System with Performance Metrics
 Objective

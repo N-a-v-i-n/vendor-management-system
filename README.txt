@@ -1,10 +1,67 @@
 # vendor-management-system
+
+1. install all modules and libraries on requirement.txt
+        -> pip install -r requirements.txt
+2. to create db 
+        -> python .\manage.py makemigrations vms
+        -> python .\manage.py migrate
+3. to create superuser
+        -> python .\manage.py createsuperuser
+
+4. to run the server app 
+        -> python .\manage.py runserver 
+
+
+API's Working:- (note :- all apis are token authentication)
+-------------------
+1. Create User to get token, to access all api's
+
+        curl  -X POST \
+          'http://127.0.0.1:8000/createuser/' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+          "Username":"naveenkumar",
+          "Password":1234
+        }'
+
+        o/p res:-
+        -----------------
+        {
+          "mgs": "User Created",
+          "token": "1f352ab9ef86f9b6861b73ac397bd631a0bca16b"
+        }
+
+2. Create Vendor on passing Token, got by user creation
+
+        curl  -X POST \
+          'http://127.0.0.1:8000/api/vendors/' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+          "name":"naveen",
+          "contact_details":"Ascahcunlw",
+          "address":2
+        }'
+
+        o/p res:-
+        -----------------
+        {
+          "msg": "Vender creation Success"
+        }
+
+
+
 Vendor Management System with Performance Metrics
 Objective
 ---------------
 Develop a Vendor Management System using Django and Django REST Framework. This
 system will handle vendor profiles, track purchase orders, and calculate vendor performance
 metrics.
+
 Core Features 
 ----------------
 1. Vendor Profile Management:
@@ -85,6 +142,7 @@ This model optionally stores historical data on vendor performance, enabling tre
     metrics are updated based on interactions recorded in the Purchase Order model
 
 Backend Logic
+-----------------
 Backend Logic for Performance Metrics
 On-Time Delivery Rate:
     ● Calculated each time a PO status changes to 'completed'.

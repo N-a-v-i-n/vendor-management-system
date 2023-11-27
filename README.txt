@@ -54,6 +54,136 @@ API's Working:- (note :- all apis are token authentication)
         }
 
 
+3. To purchase order, on passing fields, and token got by user creation
+
+        curl  -X POST \
+          'http://127.0.0.1:8000/api/purchase_orders/' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+          "vendor":"naveen",
+          "items":"Ascahcunlw",
+          "quantity":2,
+          "quality_rating":2
+        }'
+
+
+
+        o/p res:-
+        -----------------
+       {
+          "msg": "purchased success"
+        }
+
+
+4. To get all vendor details, token got by user creation
+
+        curl  -X GET \
+          'http://127.0.0.1:8000/api/vendors/' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b'
+
+        o/p res:-
+        --------------
+
+        {
+          "vendors": [
+            {
+              "id": 1,
+              "name": "naveen",
+              "contact_details": "Ascahcunlw",
+              "address": "2",
+              "vendor_code": "naveend6ddbbf6",
+              "on_time_delivery_rate": null,
+              "quality_rating_avg": null,
+              "average_response_time": null,
+              "fulfillment_rate": null
+            },
+            {
+              "id": 2,
+              "name": "kumar",
+              "contact_details": "Ascahcunlw",
+              "address": "2",
+              "vendor_code": "kumard3be7a24",
+              "on_time_delivery_rate": null,
+              "quality_rating_avg": null,
+              "average_response_time": null,
+              "fulfillment_rate": null
+            },
+            {
+              "id": 3,
+              "name": "nk",
+              "contact_details": "Ascahcunlw",
+              "address": "2",
+              "vendor_code": "nkaac2d7ad",
+              "on_time_delivery_rate": null,
+              "quality_rating_avg": null,
+              "average_response_time": null,
+              "fulfillment_rate": null
+            }
+          ]
+        }
+
+
+
+5. get purchase order through po-number
+
+        curl  -X GET \
+          'http://127.0.0.1:8000/api/purchase_orders/80785ccc' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b'
+
+
+        o/p res:-
+        -----------------
+
+        {
+          "vendor-naveen": {
+            "id": 1,
+            "po_number": "80785ccc",
+            "order_date": "2023-11-27T15:51:42.244677Z",
+            "delivery_date": "2023-11-29T15:51:42.244677Z",
+            "items": "Ascahcunlw",
+            "quantity": 2,
+            "status": "placed",
+            "quality_rating": 2.0,
+            "issue_date": "2023-11-27T21:21:42.244677Z",
+            "acknowledgment_date": "2023-11-27T21:21:42.244677Z",
+            "vendor": 1
+          }
+        }
+
+
+
+6. update purchase order
+
+        curl  -X PUT \
+          'http://127.0.0.1:8000/api/purchase_orders/80785ccc' \
+          --header 'Accept: */*' \
+          --header 'User-Agent: Thunder Client (https://www.thunderclient.com)' \
+          --header 'Authorization: Token 1f352ab9ef86f9b6861b73ac397bd631a0bca16b' \
+          --header 'Content-Type: application/json' \
+          --data-raw '{
+            "items": "frame",
+            "quantity": 5,
+            "status": "placed",
+            "quality_rating": 3.0
+          }'
+
+
+        o/p res:-
+        -----------------
+
+        {
+          "msg": "Purchase order updated"
+        }
+
+
+
 
 Vendor Management System with Performance Metrics
 Objective

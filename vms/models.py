@@ -88,10 +88,9 @@ def improve_performance(sender,instance,**kwargs):
         print("updating performance of Avg on-time delivery !!!")
         total_completed_delivery=get_all_completed_purchase_order.count()
         total_on_time_completed_delivery=get_all_completed_purchase_order.filter(delivery_date__lte=timezone.now()).count()
-        print("------------------ =",total_completed_delivery)
 
         # updating on db
-        if len(total_on_time_completed_delivery) > 0:
+        if total_on_time_completed_delivery > 0:
             update_perfomance.on_time_delivery_rate=(total_on_time_completed_delivery/total_completed_delivery)*100
             update_perfomance.date=timezone.now()
             update_perfomance.save()
